@@ -1,0 +1,22 @@
+void generatesubsets(vector<vector<int>>&ans,vector<int>&arr,vector<int>&A,int i,int n)
+    {
+        if(i==n)
+        {
+            ans.push_back(arr);
+            return ;
+        }
+        arr.push_back(A[i]);
+        generatesubsets(ans,arr,A,i+1,n);
+        arr.pop_back();
+        generatesubsets(ans,arr,A,i+1,n);
+    }
+    vector<vector<int> > subsets(vector<int>& A)
+    {
+        //code here
+        vector<vector<int>>ans;
+        vector<int>arr;
+        int n=A.size();
+        generatesubsets(ans,arr,A,0,n);
+        sort(ans.begin(),ans.end());
+        return ans;
+    }
