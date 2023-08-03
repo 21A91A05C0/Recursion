@@ -1,0 +1,37 @@
+//Given a string containing digits from 2-9 inclusive, return all possible letter combinations that the number could represent. Return the answer in any order.
+//Input: digits = "23"
+//Output: ["ad","ae","af","bd","be","bf","cd","ce","cf"]
+//hash backtracking string
+void combinations(vector<string>&ans,int ind,string digits,int n,map<char,string>&mpp,string s)
+    {
+        if(s.size()==n)
+        {
+            ans.push_back(s);
+            return ;
+        }
+        else
+        {
+            for(auto it:mpp[digits[ind]])
+            {
+                s=s+it;
+                combinations(ans,ind+1,digits,n,mpp,s);
+                s.pop_back();
+            }
+        }  
+    }
+    vector<string> letterCombinations(string digits) 
+    {
+        map<char,string>mpp;
+        mpp['2']="abc";
+        mpp['3']="def";
+        mpp['4']="ghi";
+        mpp['5']="jkl";
+        mpp['6']="mno";
+        mpp['7']="pqrs";
+        mpp['8']="tuv";
+        mpp['9']="wxyz";
+        vector<string>ans;
+        if(digits.size()==0) return ans;
+        combinations(ans,0,digits,digits.size(),mpp,"");
+        return ans;
+    }
