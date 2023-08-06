@@ -1,0 +1,34 @@
+void findpermutations(string &s,vector<string>&ans,map<char,int>mpp,int i,string &p)
+    {
+        if(p.size()==s.size())
+        {
+            ans.push_back(p);
+            return ;
+        }
+        for(int j=0;j<s.size();j++)
+        {
+            if(mpp[j]==0)
+            {
+                mpp[j]=1;
+                p=p+s[j];
+                findpermutations(s,ans,mpp,i,p);
+                p.pop_back();
+                mpp[j]=0;
+            }
+        }
+    }
+    vector<string> permutation(string S)
+    {
+        vector<string>ans;
+        map<char,int>mpp;
+        for(int i=0;i<S.size();i++)
+        {
+            mpp[i]=0; // we will keep indexes only because of duplicate characters in the string
+        }
+        
+        string p="";
+        findpermutations(S,ans,mpp,0,p);
+        sort(ans.begin(),ans.end());
+        return ans;
+
+    }
