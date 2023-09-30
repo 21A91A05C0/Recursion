@@ -1,0 +1,42 @@
+#include<bits/stdc++.h>
+using namespace std;
+void insertinorder(stack<int>&st,int x)
+{
+    if(st.empty() || st.top()<x)
+    {
+        st.push(x);
+        return ;
+    }
+    else
+    {
+        int temp=st.top();
+        st.pop();
+        insertinorder(st,x);
+        insertinorder(st,temp);
+    }
+    
+}
+void emptythestack(stack<int>&st)
+{
+    if(st.empty()) return ;
+    int x=st.top();
+    st.pop();
+    emptythestack(st);
+    insertinorder(st,x);
+}
+
+int main()
+{
+    stack<int>st;
+    st.push(10);
+    st.push(2);
+    st.push(-4);
+    st.push(30);
+    emptythestack(st);
+    while(!st.empty())
+    {
+        int k=st.top();
+        st.pop();
+        cout<<k<<" ";
+    }
+}
